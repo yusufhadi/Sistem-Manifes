@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penumpang;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PDF;
+
 
 class TiketPenumpangController extends Controller
 {
@@ -13,9 +15,17 @@ class TiketPenumpangController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tiket = Penumpang::orderBy('created_at', 'desc')->get();
+        // $tiket = Penumpang::orderBy('created_at', 'desc')->get();
+        $query = Penumpang::query();
+        $bulan = $request->input('bulan');
+
+        if ($bulan) {
+            $query->whereMonth('tanggal', $bulan);
+        }
+
+        $tiket = $query->orderBy('created_at', 'desc')->get();
         return view('dashboard.manifes-tiket', compact('tiket'));
     }
 
@@ -146,5 +156,6 @@ class TiketPenumpangController extends Controller
 
         $pdf = PDF::loadview('dashboard/tiket-penumpang-pdf', ['penumpang' => $penumpang]);
         return $pdf->stream();
+        // return $pdf->download('laporan-pegawai-pdf');
     }
 }

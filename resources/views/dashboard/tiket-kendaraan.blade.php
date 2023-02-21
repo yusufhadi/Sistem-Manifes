@@ -28,17 +28,31 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="mb-3 col-md-4">
+                    <div class="mb-3 col-md-3">
                         <label for="barang" class="form-label">Jenis Barang</label>
                         <input type="text" class="form-control" name="barang" required>
                     </div>
-                    <div class="mb-3 col-md-4">
+                    <div class="mb-3 col-md-3">
                         <label for="kendaraan" class="form-label">Jenis Kendaraan</label>
                         <input type="text" class="form-control" name="kendaraan" required>
                     </div>
-                    <div class="mb-3 col-md-4">
+                    <div class="mb-3 col-md-3">
                         <label for="golongan" class="form-label">Golongan</label>
-                        <input type="text" class="form-control" name="golongan" required>
+                        <select name="golongan" class="form-select" required>
+                            <option selected>Pilih</option>
+                            <option value="I">I</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
+                        </select>
+                    </div>
+                    <div class="mb-3 col-md-3">
+                        <label for="golongan" class="form-label">Tanggal Pemberangkatan</label>
+                        <select name="golongan" class="form-select" required>
+                            <option selected>Pilih</option>
+                            <option value="I">I</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
+                        </select>
                     </div>
                 </div>
 

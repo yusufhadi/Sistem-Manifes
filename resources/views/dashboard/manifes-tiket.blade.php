@@ -8,13 +8,26 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <button type="button" class="btn btn-primary btn-icon-split btn-sm align-left" data-bs-toggle="modal"
-                data-bs-target="#addJadwal">
-                <span class="icon text-white-50">
-                    <i class="fas fa-plus"></i>
-                </span>
-                <span class="text">Tambah Jadwal</span>
-            </button>
+            <form action="{{ route('manifes-penumpang') }}" method="GET">
+                <div class="row mt-3">
+                    <select name="bulan" class="form-select col-md-1 ml-3">
+                        <option value="">Semua</option>
+                        <option value="01">Januari</option>
+                        <option value="02">Februari</option>
+                        <option value="03">Maret</option>
+                        <option value="04">April</option>
+                        <option value="05">Mei</option>
+                        <option value="06">Juni</option>
+                        <option value="07">Juli</option>
+                        <option value="08">Agustus</option>
+                        <option value="09">September</option>
+                        <option value="10">Oktober</option>
+                        <option value="11">November</option>
+                        <option value="12">Desember</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary col-md-1 ml-3">Filter</button>
+                </div>
+            </form>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -116,8 +129,8 @@
                                 </div>
                                 <div class="mb-3 col-md-4">
                                     <label for="harga" class="form-label">Harga</label>
-                                    <input type="text" class="form-control" value="{{ $item->harga }}" name="harga"
-                                        required>
+                                    <input type="text" class="form-control" value="{{ $item->harga }}"
+                                        name="harga" required>
                                 </div>
                             </div>
                             <div class="row">

@@ -52,7 +52,7 @@
                 </div>
                 <div class="row">
                     <div class="mb-3 col-md-4">
-                        <label for="tanggal" class="form-label">Tanggal</label>
+                        <label for="tanggal" class="form-label">Tanggal Pemberangkatan</label>
                         <input type="date" class="form-control" name="tanggal" required>
                     </div>
                     <div class="mb-3 col-md-4">

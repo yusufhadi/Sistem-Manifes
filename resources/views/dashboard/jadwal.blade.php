@@ -23,7 +23,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Kapal</th>
-                            <th>Jadwal Keberangkatan</th>
+                            <th>Tanggal Keberangkatan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -65,7 +65,7 @@
                             <input type="text" class="form-control" name="kapal" required>
                         </div>
                         <div class="mb-3">
-                            <label for="tgl_keberangkatan" class="form-label">Jadwal Keberangkatan</label>
+                            <label for="tgl_keberangkatan" class="form-label">Tanggal Keberangkatan</label>
                             <input type="date" class="form-control" name="tgl_keberangkatan" required>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                                 <input type="text" class="form-control" value="{{ $item->kapal }}" name="kapal">
                             </div>
                             <div class="mb-3">
-                                <label for="tgl_keberangkatan" class="form-label">Jadwal Keberangkatan</label>
+                                <label for="tgl_keberangkatan" class="form-label">Tanggal Keberangkatan</label>
                                 <input type="date" class="form-control" value="{{ $item->tgl_keberangkatan }}"
                                     name="tgl_keberangkatan">
                             </div>
