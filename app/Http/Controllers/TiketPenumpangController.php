@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Penumpang;
 use Illuminate\Http\Request;
+use PDF;
 
 class TiketPenumpangController extends Controller
 {
@@ -14,7 +15,7 @@ class TiketPenumpangController extends Controller
      */
     public function index()
     {
-        $tiket = Penumpang::all();
+        $tiket = Penumpang::orderBy('created_at', 'desc')->get();
         return view('dashboard.manifes-tiket', compact('tiket'));
     }
 
@@ -136,5 +137,14 @@ class TiketPenumpangController extends Controller
         $data = $tiket->delete();
 
         return redirect('daftar-manifes-penumpang');
+    }
+
+    public function downloadPdf($id)
+    {
+        $penumpang = Penumpang::findOrFail($id);
+        // dd($kendaraan);
+
+        $pdf = PDF::loadview('dashboard/tiket-penumpang-pdf', ['penumpang' => $penumpang]);
+        return $pdf->stream();
     }
 }

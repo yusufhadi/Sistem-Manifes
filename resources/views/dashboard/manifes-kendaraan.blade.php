@@ -42,7 +42,9 @@
                                 <td>{{ $k->kendaraan }}</td>
                                 <td>{{ $k->golongan }}</td>
                                 <td>
-                                    <a href="" class="btn btn-success btn-sm mr-1"> <i class="fas fa-print"></i></a>
+                                    <a href="{{ route('download-kendaraan', $k->id) }}" target="_blank"
+                                        class="btn btn-success btn-sm mr-1">
+                                        <i class="fas fa-print"></i></a>
                                     <a href="" class="btn btn-warning btn-sm mr-1" data-bs-toggle="modal"
                                         data-bs-target="#updateKendaraan-{{ $k->id }}"> <i class="fas fa-pen"></i>
                                     </a>

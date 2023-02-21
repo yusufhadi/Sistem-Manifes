@@ -32,9 +32,11 @@ Route::get('/tiket-penumpang', [TiketPenumpangController::class, 'create'])->nam
 Route::post('/tiket-penumpang', [TiketPenumpangController::class, 'store'])->name('tambah-tiket-penumpang');
 Route::put('/tiket-penumpang/{id}', [TiketPenumpangController::class, 'update'])->name('update-tiket-penumpang');
 Route::get('/tiket-penumpang/delete/{id}', [TiketPenumpangController::class, 'destroy'])->name('delete-tiket-penumpang');
+Route::get('/download-penumpang/{id}', [TiketPenumpangController::class, 'downloadPdf'])->name('download-penumpang');
 
 Route::get('/daftar-manifes-kendaraan', [KendaraanController::class, 'index'])->name('manifes-kendaraan');
 Route::get('/tiket-kendaraan', [KendaraanController::class, 'create'])->name('kendaraan');
 Route::post('/tiket-kendaraan', [KendaraanController::class, 'store'])->name('tambah-kendaraan');
 Route::put('/tiket-kendaraan/{id}', [KendaraanController::class, 'update'])->name('update-kendaraan');
 Route::get('/tiket-kendaraan/delete/{id}', [KendaraanController::class, 'destroy'])->name('delete-kendaraan');
+Route::get('/download-tiket/{id}', [KendaraanController::class, 'downloadPdf'])->name('download-kendaraan');

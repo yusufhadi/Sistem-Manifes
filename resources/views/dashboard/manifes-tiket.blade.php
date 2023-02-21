@@ -48,7 +48,8 @@
                                 <td>{{ $t->asal }}</td>
                                 <td>{{ $t->tujuan }}</td>
                                 <td>
-                                    <a href="" class="btn btn-success btn-sm mr-1"> <i class="fas fa-print"></i></a>
+                                    <a href="{{ route('download-penumpang', $t->id) }}" target="_blank"
+                                        class="btn btn-success btn-sm mr-1"> <i class="fas fa-print"></i></a>
                                     <a href="" class="btn btn-warning btn-sm mr-1" data-bs-toggle="modal"
                                         data-bs-target="#updateTiket-{{ $t->id }}"> <i class="fas fa-pen"></i>
                                     </a>

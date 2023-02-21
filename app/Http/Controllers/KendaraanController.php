@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kendaraan;
 use Illuminate\Http\Request;
+use PDF;
 
 class KendaraanController extends Controller
 {
@@ -14,7 +15,7 @@ class KendaraanController extends Controller
      */
     public function index()
     {
-        $kendaraan = Kendaraan::all();
+        $kendaraan = Kendaraan::orderBy('created_at', 'desc')->get();
         return view('dashboard.manifes-kendaraan', compact('kendaraan'));
     }
 
@@ -126,5 +127,14 @@ class KendaraanController extends Controller
         $data = $kendaraan->delete();
 
         return redirect('daftar-manifes-kendaraan');
+    }
+
+    public function downloadPdf($id)
+    {
+        $kendaraan = Kendaraan::findOrFail($id);
+        // dd($kendaraan);
+
+        $pdf = PDF::loadview('dashboard/tiket-kendaraan-pdf', ['kendaraan' => $kendaraan]);
+        return $pdf->stream();
     }
 }
