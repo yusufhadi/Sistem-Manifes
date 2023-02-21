@@ -11,6 +11,7 @@ class Jadwal extends Model
 
     protected $fillable = [
         'kapal',
-        'tgl_keberangkatan'
+        'tgl_keberangkatan',
+        'jam_keberangkatan'
     ];
 }

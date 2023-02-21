@@ -17,6 +17,7 @@ class CreateJadwalsTable extends Migration
             $table->id();
             $table->string('kapal');
             $table->date('tgl_keberangkatan');
+            $table->string('jam_keberangkatan');
             $table->timestamps();
         });
     }

@@ -38,12 +38,14 @@ class JadwalController extends Controller
     {
         $this->validate($request, [
             'kapal' => 'required',
-            'tgl_keberangkatan' => 'required'
+            'tgl_keberangkatan' => 'required',
+            'jam_keberangkatan' => 'required'
         ]);
 
         $jadwal = Jadwal::create([
             'kapal' => $request->kapal,
-            'tgl_keberangkatan' => $request->tgl_keberangkatan
+            'tgl_keberangkatan' => $request->tgl_keberangkatan,
+            'jam_keberangkatan' => $request->jam_keberangkatan
         ]);
 
         // dd($jadwal);
@@ -84,14 +86,16 @@ class JadwalController extends Controller
     {
         $request->validate([
             'kapal' => 'required',
-            'tgl_keberangkatan' => 'required'
+            'tgl_keberangkatan' => 'required',
+            'jam_keberangkatan' => 'required',
         ]);
 
         $jadwal = Jadwal::findOrFail($id);
 
         $jadwal->update([
             'kapal' => $request->kapal,
-            'tgl_keberangkatan' => $request->tgl_keberangkatan
+            'tgl_keberangkatan' => $request->tgl_keberangkatan,
+            'jam_keberangkatan' => $request->jam_keberangkatan
         ]);
 
         return redirect('jadwal');
