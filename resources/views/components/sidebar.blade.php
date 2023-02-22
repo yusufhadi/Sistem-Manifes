@@ -58,7 +58,7 @@
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('user') }}">
-            <i class="fas fa-fw fa-calendar"></i>
+            <i class="fas fa-fw fa-users"></i>
             <span>Management Account</span></a>
     </li>
 
