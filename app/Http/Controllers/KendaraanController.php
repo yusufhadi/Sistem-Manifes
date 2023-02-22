@@ -75,7 +75,8 @@ class KendaraanController extends Controller
 
         // dd($kendaraan);
         $jadwal = Jadwal::all();
-        return view('dashboard.tiket-kendaraan', compact('jadwal'));
+        return redirect('tiket-kendaraan')->with('toast_success', 'Tiket Kendaraan Berhasil Ditambahkan');
+        // return view('dashboard.tiket-kendaraan', compact('jadwal'))->with('toast_success', 'Tiket Kendaraan Berhasil Ditambahkan');
     }
 
     /**
@@ -135,7 +136,7 @@ class KendaraanController extends Controller
             'tgl_keberangkatan' => $request->tgl_keberangkatan
         ]);
 
-        return redirect('daftar-manifes-kendaraan');
+        return redirect('daftar-manifes-kendaraan')->with('toast_success', 'Tiket Kendaraan Berhasil Diubah');
     }
 
     /**
@@ -150,7 +151,7 @@ class KendaraanController extends Controller
 
         $data = $kendaraan->delete();
 
-        return redirect('daftar-manifes-kendaraan');
+        return redirect('daftar-manifes-kendaraan')->with('toast_success', 'Tiket Kendaraan Berhasil Dihapus');
     }
 
     public function downloadPdf($id)

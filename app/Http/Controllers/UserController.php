@@ -53,7 +53,7 @@ class UserController extends Controller
             'level' => $request->level,
         ]);
 
-        return redirect('user');
+        return redirect('user')->with('toast_success', 'Account Berhasil Ditambahkan');
     }
 
     /**
@@ -105,7 +105,7 @@ class UserController extends Controller
             'level' => $request->level,
         ]);
 
-        return redirect('user');
+        return redirect('user')->with('toast_success', 'Account Berhasil Diubah');
     }
 
     /**
@@ -120,6 +120,6 @@ class UserController extends Controller
 
         $data = $user->delete();
 
-        return redirect('user');
+        return redirect('user')->with('toast_success', 'Account Berhasil Dihapus');
     }
 }

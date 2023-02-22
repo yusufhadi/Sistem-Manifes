@@ -79,7 +79,7 @@ class TiketPenumpangController extends Controller
             'tujuan' => $request->tujuan
         ]);
 
-        return redirect('tiket-penumpang');
+        return redirect('tiket-penumpang')->with('toast_success', 'Tiket Penumpang Berhasil Ditambahkan');
     }
 
     /**
@@ -143,7 +143,7 @@ class TiketPenumpangController extends Controller
             'tujuan' => $request->tujuan
         ]);
 
-        return redirect('daftar-manifes-penumpang');
+        return redirect('daftar-manifes-penumpang')->with('toast_success', 'Tiket Penumpang Berhasil Diubah');
     }
 
     /**
@@ -158,7 +158,7 @@ class TiketPenumpangController extends Controller
 
         $data = $tiket->delete();
 
-        return redirect('daftar-manifes-penumpang');
+        return redirect('daftar-manifes-penumpang')->with('toast_success', 'Tiket Penumpang Berhasil Dihapus');
     }
 
     public function downloadPdf($id)

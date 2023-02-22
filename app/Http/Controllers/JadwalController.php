@@ -53,7 +53,7 @@ class JadwalController extends Controller
 
         // dd($jadwal);
 
-        return redirect('jadwal');
+        return redirect('jadwal')->with('toast_success', 'Jadwal Berhasil Ditambahkan');
     }
 
     /**
@@ -103,7 +103,7 @@ class JadwalController extends Controller
             'jadwal' => $request->jadwal,
         ]);
 
-        return redirect('jadwal');
+        return redirect('jadwal')->with('toast_success', 'Jadwal Berhasil Diubah');
     }
 
     /**
@@ -118,6 +118,6 @@ class JadwalController extends Controller
 
         $data = $jadwal->delete();
 
-        return redirect('jadwal');
+        return redirect('jadwal')->with('toast_success', 'Jadwal Berhasil Dihapus');
     }
 }
