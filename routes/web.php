@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\TiketPenumpangController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('dashboard');
 // });
+
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal');
@@ -40,3 +42,8 @@ Route::post('/tiket-kendaraan', [KendaraanController::class, 'store'])->name('ta
 Route::put('/tiket-kendaraan/{id}', [KendaraanController::class, 'update'])->name('update-kendaraan');
 Route::get('/tiket-kendaraan/delete/{id}', [KendaraanController::class, 'destroy'])->name('delete-kendaraan');
 Route::get('/download-tiket/{id}', [KendaraanController::class, 'downloadPdf'])->name('download-kendaraan');
+
+Route::get('/user', [UserController::class, 'index'])->name('user');
+Route::post('/user', [UserController::class, 'store'])->name('tambah-user');
+Route::put('/user/{id}', [UserController::class, 'update'])->name('update-user');
+Route::get('/user/delete/{id}', [UserController::class, 'destroy'])->name('delete-user');

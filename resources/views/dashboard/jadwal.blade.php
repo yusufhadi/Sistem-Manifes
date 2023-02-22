@@ -105,8 +105,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="jadwal" class="form-label">Waktu Keberangkatan</label>
-                                <input type="date" id="waktu" class="form-control" value="{{ $item->jadwal }}"
-                                    name="jadwal">
+                                <input type="datetime-local" id="waktu" class="form-control"
+                                    value="{{ $item->jadwal }}" name="jadwal">
                             </div>
                         </div>
                         <div class="modal-footer">
