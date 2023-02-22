@@ -23,8 +23,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Kapal</th>
-                            <th>Tanggal Keberangkatan</th>
-                            <th>Jam Keberangkatan</th>
+                            <th>Jadwal Keberangkatan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -33,8 +32,9 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $j->kapal }}</td>
-                                <td>{{ date('d-m-Y', strtotime($j->tgl_keberangkatan)) }}</td>
-                                <td>{{ $j->jam_keberangkatan }} WITA</td>
+                                <td>Jam {{ date('H:i', strtotime($j->jadwal)) }}, Tanggal
+                                    {{ date('d-m-y', strtotime($j->jadwal)) }}
+                                </td>
                                 <td>
                                     <a href="" class="btn btn-warning btn-sm mr-1" data-bs-toggle="modal"
                                         data-bs-target="#updateJadwal-{{ $j->id }}"> <i class="fas fa-pen"></i>
@@ -71,12 +71,8 @@
                             <input type="text" class="form-control" name="kapal" required>
                         </div>
                         <div class="mb-3">
-                            <label for="tgl_keberangkatan" class="form-label">Tanggal Keberangkatan</label>
-                            <input type="date" class="form-control" name="tgl_keberangkatan" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="jam_keberangkatan" class="form-label">Jam Keberangkatan</label>
-                            <input type="time" class="form-control" name="jam_keberangkatan" required>
+                            <label for="jadwal" class="form-label">Waktu Keberangkatan</label>
+                            <input type="datetime-local" id="jadwal" class="form-control" name="jadwal" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -108,14 +104,9 @@
                                 <input type="text" class="form-control" value="{{ $item->kapal }}" name="kapal">
                             </div>
                             <div class="mb-3">
-                                <label for="tgl_keberangkatan" class="form-label">Tanggal Keberangkatan</label>
-                                <input type="date" class="form-control" value="{{ $item->tgl_keberangkatan }}"
-                                    name="tgl_keberangkatan">
-                            </div>
-                            <div class="mb-3">
-                                <label for="jam_keberangkatan" class="form-label">Jam Keberangkatan</label>
-                                <input type="time" class="form-control" value="{{ $item->jam_keberangkatan }}"
-                                    name="jam_keberangkatan" required>
+                                <label for="jadwal" class="form-label">Waktu Keberangkatan</label>
+                                <input type="date" id="waktu" class="form-control" value="{{ $item->jadwal }}"
+                                    name="jadwal">
                             </div>
                         </div>
                         <div class="modal-footer">

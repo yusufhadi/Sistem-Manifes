@@ -27,6 +27,7 @@
                 <th>Jenis Barang</th>
                 <th>Jenis Kendaraan</th>
                 <th>Golongan</th>
+                <th>Tanggal Pemberangkatan</th>
             </tr>
         </thead>
         <tbody>
@@ -37,6 +38,8 @@
                 <td>{{ $kendaraan->barang }}</td>
                 <td>{{ $kendaraan->kendaraan }}</td>
                 <td>{{ $kendaraan->golongan }}</td>
+                <td>Jam {{ date('H:i', strtotime($kendaraan->tgl_keberangkatan)) }}, Tanggal
+                    {{ date('d-m-y', strtotime($kendaraan->tgl_keberangkatan)) }}</td>
             </tr>
         </tbody>
     </table>

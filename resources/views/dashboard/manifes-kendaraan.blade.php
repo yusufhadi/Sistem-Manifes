@@ -8,13 +8,26 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <button type="button" class="btn btn-primary btn-icon-split btn-sm align-left" data-bs-toggle="modal"
-                data-bs-target="#addJadwal">
-                <span class="icon text-white-50">
-                    <i class="fas fa-plus"></i>
-                </span>
-                <span class="text">Tambah Jadwal</span>
-            </button>
+            <form action="{{ route('manifes-kendaraan') }}" method="GET">
+                <div class="row mt-3">
+                    <select name="bulan" class="form-select col-md-1 ml-3">
+                        <option value="">Semua</option>
+                        <option value="01">Januari</option>
+                        <option value="02">Februari</option>
+                        <option value="03">Maret</option>
+                        <option value="04">April</option>
+                        <option value="05">Mei</option>
+                        <option value="06">Juni</option>
+                        <option value="07">Juli</option>
+                        <option value="08">Agustus</option>
+                        <option value="09">September</option>
+                        <option value="10">Oktober</option>
+                        <option value="11">November</option>
+                        <option value="12">Desember</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary col-md-1 ml-3">Filter</button>
+                </div>
+            </form>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -28,11 +41,12 @@
                             <th>Jenis Barang</th>
                             <th>Jenis Kendaraan</th>
                             <th>Golongan</th>
+                            <th>Tanggal Pemberangkatan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($kendaraan as $k)
+                        @forelse ($kendaraan as $k)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $k->nama }}</td>
@@ -41,6 +55,8 @@
                                 <td>{{ $k->barang }}</td>
                                 <td>{{ $k->kendaraan }}</td>
                                 <td>{{ $k->golongan }}</td>
+                                <td> Jam {{ date('H:i', strtotime($k->tgl_keberangkatan)) }}, Tanggal
+                                    {{ date('d-m-y', strtotime($k->tgl_keberangkatan)) }}</td>
                                 <td>
                                     <a href="{{ route('download-kendaraan', $k->id) }}" target="_blank"
                                         class="btn btn-success btn-sm mr-1">
@@ -48,12 +64,16 @@
                                     <a href="" class="btn btn-warning btn-sm mr-1" data-bs-toggle="modal"
                                         data-bs-target="#updateKendaraan-{{ $k->id }}"> <i class="fas fa-pen"></i>
                                     </a>
-                                    <a href="{{ route('delete-kendaraan', $k->id) }}" class="btn btn-danger btn-sm mr-1"> <i
-                                            class="fas fa-trash"></i>
+                                    <a href="{{ route('delete-kendaraan', $k->id) }}" class="btn btn-danger btn-sm mr-1">
+                                        <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="9" class="text-center">Tidak Ada Data</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -75,28 +95,28 @@
                         @csrf
                         <div class="modal-body">
                             <div class="row">
-                                <div class="mb-3 col-md-4">
+                                <div class="mb-3 col-md-3">
                                     <label for="nama" class="form-label">Nama</label>
                                     <input type="text" class="form-control" value="{{ $item->nama }}" name="nama"
                                         required>
                                 </div>
-                                <div class="mb-3 col-md-4">
+                                <div class="mb-3 col-md-3">
                                     <label for="plat" class="form-label">No Plat</label>
                                     <input type="text" class="form-control" value="{{ $item->plat }}" name="plat"
                                         required>
                                 </div>
-                                <div class="mb-3 col-md-4">
+                                <div class="mb-3 col-md-3">
                                     <label for="tiket" class="form-label">No Tiket</label>
                                     <input type="text" class="form-control" value="{{ $item->tiket }}" name="tiket"
                                         required>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="mb-3 col-md-4">
+                                <div class="mb-3 col-md-3">
                                     <label for="barang" class="form-label">Jenis Barang</label>
                                     <input type="text" class="form-control" value="{{ $item->barang }}" name="barang"
                                         required>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="mb-3 col-md-4">
                                     <label for="kendaraan" class="form-label">Jenis Kendaraan</label>
                                     <input type="text" class="form-control" value="{{ $item->kendaraan }}"
@@ -104,8 +124,25 @@
                                 </div>
                                 <div class="mb-3 col-md-4">
                                     <label for="golongan" class="form-label">Golongan</label>
-                                    <input type="text" class="form-control" value="{{ $item->golongan }}"
-                                        name="golongan" required>
+                                    <select name="golongan" class="form-select" required>
+                                        <option selected>{{ $item->golongan }}</option>
+                                        <option value="I">I</option>
+                                        <option value="II">II</option>
+                                        <option value="III">III</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-md-4">
+                                    <label for="tgl_keberangkatan" class="form-label">Tanggal Pemberangkatan</label>
+                                    <select name="tgl_keberangkatan" class="form-select" required>
+                                        <option selected>Jam {{ date('H:i', strtotime($k->tgl_keberangkatan)) }}, Tanggal
+                                            {{ date('d-m-y', strtotime($k->tgl_keberangkatan)) }}</option>
+                                        @foreach ($jadwal as $j)
+                                            <option value="{{ $j->jadwal }}">
+                                                Jam {{ date('H:i', strtotime($j->jadwal)) }}, Tanggal
+                                                {{ date('d-m-y', strtotime($j->jadwal)) }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>

@@ -48,7 +48,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($tiket as $t)
+                        @forelse ($tiket as $t)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $t->nama }}</td>
@@ -57,7 +57,8 @@
                                 <td>{{ $t->jk }}</td>
                                 <td>{{ $t->golongan }}</td>
                                 <td>{{ $t->harga }}</td>
-                                <td>{{ date('d-m-Y', strtotime($t->tanggal)) }}</td>
+                                <td>Jam {{ date('H:i', strtotime($t->tgl_keberangkatan)) }}, Tanggal
+                                    {{ date('d-m-y', strtotime($t->tgl_keberangkatan)) }}</td>
                                 <td>{{ $t->asal }}</td>
                                 <td>{{ $t->tujuan }}</td>
                                 <td>
@@ -71,7 +72,11 @@
                                     </a>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="11" class="text-center">Tidak Ada Data</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -113,7 +118,7 @@
                                 <div class="mb-3 col-md-4">
                                     <label for="jk" class="form-label">Jenis Kelamin</label>
                                     <select name="jk" class="form-select" required>
-                                        <option value="{{ $item->jk }}" selected>Pilih</option>
+                                        <option selected>{{ $item->jk }}</option>
                                         <option value="Perempuan">Perempuan</option>
                                         <option value="Laki-Laki">Laki-Laki</option>
                                     </select>
@@ -121,7 +126,7 @@
                                 <div class="mb-3 col-md-4">
                                     <label for="golongan" class="form-label">Golongan</label>
                                     <select name="golongan" class="form-select" required>
-                                        <option value="{{ $item->golongan }}" selected>Pilih</option>
+                                        <option selected>{{ $item->golongan }}</option>
                                         <option value="I">I</option>
                                         <option value="II">II</option>
                                         <option value="III">III</option>
@@ -135,9 +140,18 @@
                             </div>
                             <div class="row">
                                 <div class="mb-3 col-md-4">
-                                    <label for="tanggal" class="form-label">Tanggal</label>
-                                    <input type="date" class="form-control" value="{{ $item->tanggal }}"
-                                        name="tanggal" required>
+                                    <label for="tgl_keberangkatan" class="form-label">Tanggal</label>
+                                    <select name="tgl_keberangkatan" class="form-select" required>
+                                        <option selected>Jam {{ date('H:i', strtotime($item->tgl_keberangkatan)) }},
+                                            Tanggal
+                                            {{ date('d-m-y', strtotime($item->tgl_keberangkatan)) }}</option>
+                                        @foreach ($jadwal as $j)
+                                            <option value="{{ $j->jadwal }}">
+                                                Jam {{ date('H:i', strtotime($j->jadwal)) }}, Tanggal
+                                                {{ date('d-m-y', strtotime($j->jadwal)) }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="mb-3 col-md-4">
                                     <label for="asal" class="form-label">Asal</label>

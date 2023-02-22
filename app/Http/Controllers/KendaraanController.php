@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jadwal;
 use App\Models\Kendaraan;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use PDF;
 
 class KendaraanController extends Controller
@@ -13,10 +15,19 @@ class KendaraanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $kendaraan = Kendaraan::orderBy('created_at', 'desc')->get();
-        return view('dashboard.manifes-kendaraan', compact('kendaraan'));
+        $jadwal = Jadwal::all();
+        // $kendaraan = Kendaraan::orderBy('created_at', 'desc')->get();
+        $query = Kendaraan::query();
+        $bulan = $request->input('bulan');
+
+        if ($bulan) {
+            $query->whereMonth('tgl_keberangkatan', $bulan);
+        }
+
+        $kendaraan = $query->orderBy('created_at', 'desc')->get();
+        return view('dashboard.manifes-kendaraan', compact('kendaraan', 'jadwal'));
     }
 
     /**
@@ -26,7 +37,8 @@ class KendaraanController extends Controller
      */
     public function create()
     {
-        return view('dashboard.tiket-kendaraan');
+        $jadwal = Jadwal::all();
+        return view('dashboard.tiket-kendaraan', compact('jadwal'));
     }
 
     /**
@@ -43,7 +55,12 @@ class KendaraanController extends Controller
             'tiket' => 'required',
             'barang' => 'required',
             'kendaraan' => 'required',
-            'golongan' => 'required'
+            'golongan' => 'required',
+            'tgl_keberangkatan' => 'required',
+            'date_format:Y-m-d\TH:i:s',
+            Rule::unique('tabel')->where(function ($query) use ($request) {
+                return $query->where('jadwal', $request->jadwal);
+            }),
         ]);
 
         $kendaraan = Kendaraan::create([
@@ -52,12 +69,13 @@ class KendaraanController extends Controller
             'tiket' => $request->tiket,
             'barang' => $request->barang,
             'kendaraan' => $request->kendaraan,
-            'golongan' => $request->golongan
+            'golongan' => $request->golongan,
+            'tgl_keberangkatan' => $request->tgl_keberangkatan
         ]);
 
         // dd($kendaraan);
-
-        return view('dashboard.tiket-kendaraan');
+        $jadwal = Jadwal::all();
+        return view('dashboard.tiket-kendaraan', compact('jadwal'));
     }
 
     /**
@@ -97,7 +115,12 @@ class KendaraanController extends Controller
             'tiket' => 'required',
             'barang' => 'required',
             'kendaraan' => 'required',
-            'golongan' => 'required'
+            'golongan' => 'required',
+            'tgl_keberangkatan' => 'required',
+            'date_format:Y-m-d\TH:i:s',
+            Rule::unique('tabel')->where(function ($query) use ($request) {
+                return $query->where('jadwal', $request->jadwal);
+            }),
         ]);
 
         $kendaraan = Kendaraan::findOrFail($id);
@@ -108,7 +131,8 @@ class KendaraanController extends Controller
             'tiket' => $request->tiket,
             'barang' => $request->barang,
             'kendaraan' => $request->kendaraan,
-            'golongan' => $request->golongan
+            'golongan' => $request->golongan,
+            'tgl_keberangkatan' => $request->tgl_keberangkatan
         ]);
 
         return redirect('daftar-manifes-kendaraan');

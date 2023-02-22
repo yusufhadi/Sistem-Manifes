@@ -21,7 +21,7 @@ class CreatePenumpangsTable extends Migration
             $table->string('jk');
             $table->string('golongan');
             $table->string('harga');
-            $table->date('tanggal');
+            $table->dateTime('tgl_keberangkatan');
             $table->string('asal');
             $table->string('tujuan');
             $table->timestamps();

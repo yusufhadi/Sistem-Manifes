@@ -15,6 +15,7 @@ class Kendaraan extends Model
         'tiket',
         'barang',
         'kendaraan',
-        'golongan'
+        'golongan',
+        'tgl_keberangkatan'
     ];
 }

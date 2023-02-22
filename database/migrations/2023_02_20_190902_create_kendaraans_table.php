@@ -21,6 +21,7 @@ class CreateKendaraansTable extends Migration
             $table->string('barang');
             $table->string('kendaraan');
             $table->string('golongan');
+            $table->dateTime('tgl_keberangkatan');
             $table->timestamps();
         });
     }

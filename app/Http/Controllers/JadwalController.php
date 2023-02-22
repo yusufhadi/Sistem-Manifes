@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jadwal;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class JadwalController extends Controller
 {
@@ -38,14 +39,16 @@ class JadwalController extends Controller
     {
         $this->validate($request, [
             'kapal' => 'required',
-            'tgl_keberangkatan' => 'required',
-            'jam_keberangkatan' => 'required'
+            'jadwal' => 'required',
+            'date_format:Y-m-d\TH:i:s',
+            Rule::unique('tabel')->where(function ($query) use ($request) {
+                return $query->where('jadwal', $request->jadwal);
+            }),
         ]);
 
         $jadwal = Jadwal::create([
             'kapal' => $request->kapal,
-            'tgl_keberangkatan' => $request->tgl_keberangkatan,
-            'jam_keberangkatan' => $request->jam_keberangkatan
+            'jadwal' => $request->jadwal,
         ]);
 
         // dd($jadwal);
@@ -86,16 +89,18 @@ class JadwalController extends Controller
     {
         $request->validate([
             'kapal' => 'required',
-            'tgl_keberangkatan' => 'required',
-            'jam_keberangkatan' => 'required',
+            'jadwal' => 'required',
+            'date_format:Y-m-d\TH:i:s',
+            Rule::unique('tabel')->where(function ($query) use ($request) {
+                return $query->where('jadwal', $request->jadwal);
+            }),
         ]);
 
         $jadwal = Jadwal::findOrFail($id);
 
         $jadwal->update([
             'kapal' => $request->kapal,
-            'tgl_keberangkatan' => $request->tgl_keberangkatan,
-            'jam_keberangkatan' => $request->jam_keberangkatan
+            'jadwal' => $request->jadwal,
         ]);
 
         return redirect('jadwal');

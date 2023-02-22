@@ -40,7 +40,8 @@
                 <td>{{ $penumpang->jk }}</td>
                 <td>{{ $penumpang->golongan }}</td>
                 <td>{{ $penumpang->harga }}</td>
-                <td>{{ date('d-m-Y', strtotime($penumpang->tanggal)) }}</td>
+                <td>Jam {{ date('H:i', strtotime($penumpang->tgl_keberangkatan)) }}, Tanggal
+                    {{ date('d-m-y', strtotime($penumpang->tgl_keberangkatan)) }}</td>
                 <td>{{ $penumpang->asal }}</td>
                 <td>{{ $penumpang->tujuan }}</td>
             </tr>

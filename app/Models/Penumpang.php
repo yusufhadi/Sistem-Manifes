@@ -16,7 +16,7 @@ class Penumpang extends Model
         'jk',
         'golongan',
         'harga',
-        'tanggal',
+        'tgl_keberangkatan',
         'asal',
         'tujuan'
     ];

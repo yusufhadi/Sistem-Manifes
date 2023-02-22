@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penumpang;
+use App\Models\Jadwal;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use PDF;
 
 
@@ -18,15 +20,16 @@ class TiketPenumpangController extends Controller
     public function index(Request $request)
     {
         // $tiket = Penumpang::orderBy('created_at', 'desc')->get();
+        $jadwal = Jadwal::all();
         $query = Penumpang::query();
         $bulan = $request->input('bulan');
 
         if ($bulan) {
-            $query->whereMonth('tanggal', $bulan);
+            $query->whereMonth('tgl_keberangkatan', $bulan);
         }
 
         $tiket = $query->orderBy('created_at', 'desc')->get();
-        return view('dashboard.manifes-tiket', compact('tiket'));
+        return view('dashboard.manifes-tiket', compact('tiket', 'jadwal'));
     }
 
     /**
@@ -36,7 +39,8 @@ class TiketPenumpangController extends Controller
      */
     public function create()
     {
-        return view('dashboard.tiket-penumpang');
+        $jadwal = Jadwal::all();
+        return view('dashboard.tiket-penumpang', compact('jadwal'));
     }
 
     /**
@@ -54,7 +58,11 @@ class TiketPenumpangController extends Controller
             'jk' => 'required',
             'golongan' => 'required',
             'harga' => 'required',
-            'tanggal' => 'required',
+            'tgl_keberangkatan' => 'required',
+            'date_format:Y-m-d\TH:i:s',
+            Rule::unique('tabel')->where(function ($query) use ($request) {
+                return $query->where('jadwal', $request->jadwal);
+            }),
             'asal' => 'required',
             'tujuan' => 'required'
         ]);
@@ -66,7 +74,7 @@ class TiketPenumpangController extends Controller
             'jk' => $request->jk,
             'golongan' => $request->golongan,
             'harga' => $request->harga,
-            'tanggal' => $request->tanggal,
+            'tgl_keberangkatan' => $request->tgl_keberangkatan,
             'asal' => $request->asal,
             'tujuan' => $request->tujuan
         ]);
@@ -112,7 +120,11 @@ class TiketPenumpangController extends Controller
             'jk' => 'required',
             'golongan' => 'required',
             'harga' => 'required',
-            'tanggal' => 'required',
+            'tgl_keberangkatan' => 'required',
+            'date_format:Y-m-d\TH:i:s',
+            Rule::unique('tabel')->where(function ($query) use ($request) {
+                return $query->where('jadwal', $request->jadwal);
+            }),
             'asal' => 'required',
             'tujuan' => 'required'
         ]);
@@ -126,7 +138,7 @@ class TiketPenumpangController extends Controller
             'jk' => $request->jk,
             'golongan' => $request->golongan,
             'harga' => $request->harga,
-            'tanggal' => $request->tanggal,
+            'tgl_keberangkatan' => $request->tgl_keberangkatan,
             'asal' => $request->asal,
             'tujuan' => $request->tujuan
         ]);
