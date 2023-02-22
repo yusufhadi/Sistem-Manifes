@@ -35,12 +35,14 @@
         </div>
     </li>
 
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('jadwal') }}">
-            <i class="fas fa-fw fa-calendar"></i>
-            <span>Jadwal Keberangkatan</span></a>
-    </li>
+    @if (Auth::user()->level == 'admin')
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('jadwal') }}">
+                <i class="fas fa-fw fa-calendar"></i>
+                <span>Jadwal Keberangkatan</span></a>
+        </li>
+    @endif
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -56,11 +58,13 @@
         </div>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('user') }}">
-            <i class="fas fa-fw fa-users"></i>
-            <span>Management Account</span></a>
-    </li>
+    @if (Auth::user()->level == 'admin')
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('user') }}">
+                <i class="fas fa-fw fa-users"></i>
+                <span>Management Account</span></a>
+        </li>
+    @endif
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
