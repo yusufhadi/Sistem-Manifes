@@ -134,12 +134,10 @@
                                 <div class="mb-3 col-md-4">
                                     <label for="tgl_keberangkatan" class="form-label">Tanggal Pemberangkatan</label>
                                     <select name="tgl_keberangkatan" class="form-select" required>
-                                        <option selected>Pilih</option>
                                         @foreach ($jadwal as $j)
-                                            <option value="{{ $j->jadwal }}">
-                                                Jam {{ date('H:i', strtotime($j->jadwal)) }}, Tanggal
-                                                {{ date('d-m-y', strtotime($j->jadwal)) }}
-                                            </option>
+                                            <option value="{{ $j->jadwal }}" selected>Jam
+                                                {{ date('H:i', strtotime($j->jadwal)) }}, Tanggal
+                                                {{ date('d-m-y', strtotime($j->jadwal)) }}</option>
                                         @endforeach
                                     </select>
                                 </div>
