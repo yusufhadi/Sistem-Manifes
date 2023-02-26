@@ -50,16 +50,28 @@
                                         <div class="form-group">
                                             <input type="email" name="email" class="form-control form-control-user"
                                                 aria-describedby="emailHelp" placeholder="Enter Email Address...">
-                                            {{-- @error('email')
+                                            @error('email')
                                                 <div class="text-danger">
                                                     {{ $message }}
                                                 </div>
-                                            @enderror --}}
+                                            @enderror
                                         </div>
+
                                         <div class="form-group">
                                             <input type="password" name="password"
                                                 class="form-control form-control-user" placeholder="Password">
+                                            @error('password')
+                                                <div class="text-danger">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
+
+                                        @error('not_found_user')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                         <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
                                     </form>
                                 </div>

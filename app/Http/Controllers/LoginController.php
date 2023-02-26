@@ -24,6 +24,10 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($user)) {
+            session()->flash(
+                'message',
+                'Login Berhasil',
+            );
             return view('dashboard.dashboard', [
                 'penumpang' => Penumpang::count(),
                 'kendaraan' => Kendaraan::count(),
@@ -32,7 +36,7 @@ class LoginController extends Controller
             ]);
         } else {
             return back()->withErrors([
-                'email' => 'Email Anda Salah'
+                'not_found_user' => 'Email atau Password Anda Salah',
             ]);
         }
     }
